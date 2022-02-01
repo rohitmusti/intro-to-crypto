@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Introduction to Cryptography | Rohit Musti</title>
+  </head>
+  <style>
+    body {
+      background-color: black;
+      color: white;
+    }
+    div {
+      margin: 0px 20px 0px 20px;
+      line-height: 25px;
+      width: 75%;
+    }
+    @media (max-width: 750px) {
+      div {
+        width: 100%;
+      }
+    }
+    p,
+    li,
+    th,
+    td {
+      font-size: 20px;
+    }
+    table,
+    td,
+    th {
+      padding: 5px 10px 5px 10px;
+    }
+  </style>
+  <body>
+    <div>
+      <h1>Introduction to Cryptography</h1>
+      <p>
+        <i>Instructor: </i>Rohit Musti, <i>Current Semester: </i>Spring 2022
+      </p>
+    </div>
+    <hr />
+    <div>
+      <h2>Course Goal</h2>
+      <p>
+        My goal is to provide you (the student) with a working understanding of
+        cryptographic primitives and the confidence to pursue further study or
+        real world application of your knowledge (including, but not limited to,
+        boring your loved ones with enthusiastic descriptions of obscure
+        cryptographic constructions over the dinner table).
+      </p>
+    </div>
+    <div>
+      <h2>Course Schedule</h2>
+      <table rules="rows">
+        <tr>
+          <th>Date</th>
+          <th>Lecture Topic</th>
+          <th>Notes</th>
+        </tr>
+        <tr>
+          <td>February 2, 2022</td>
+          <td>Course Introduction and History of Cryptography</td>
+          <td>NA</td>
+        </tr>
+        <tr>
+          <td>February 9, 2022</td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>February 16, 2022</td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>February 23, 2022</td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>March 2, 2022</td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>March 9, 2022</td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>March 16, 2022</td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>March 23, 2022</td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>March 30, 2022</td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>April 6, 2022</td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>April 13, 2022</td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>April 20, 2022</td>
+          <td><i>Spring Recess</i></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>April 27, 2022</td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>May 4, 2022</td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>May 11, 2022</td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>May 18, 2022</td>
+          <td><i>Final Exam</i> (date/time not official yet)</td>
+          <td></td>
+        </tr>
+      </table>
+    </div>
+    <div>
+      <h2>Course Policies</h2>
+      <ul>
+        <li>
+          These policies are subject to change at my discretion as the
+          instructor. However, I will announce all changes and will do my best
+          to avoid making significant changes.
+        </li>
+        <li>
+          Course Contract: I, as the instructor, agree to provide you with the
+          resources you need to succeed in this class and you as the student
+          will do your best to succeed. By offering this class, I agree to this
+          contract and by taking the class you agree to this contract and agree
+          to adhere to all course policies.
+        </li>
+        <li>
+          Course Honor Code:
+          <i>I will not lie, cheat, or steal</i>. I understand that, at times,
+          this class may feel stressful. If you are feeling overwhelmed and
+          concerned about your ability to achieve the grade you are aiming for
+          in this class, please do not hesitate to reach out to me directly and
+          we can work out a plan together.
+        </li>
+        <li>
+          <i>Course Errors:</i>
+          If you find a mistake in any course materials (including this site,
+          lectures, or assigned homework), I will give you up to a 5% bump on an
+          assignment of your choice. This is a first come first serve policy
+          (i.e. only the first student to spot and report a eerror will receive
+          the credit). I will award an extra 2% to any student who makes a PR
+          with the fix that is successfully merged into the class.
+        </li>
+        <li>
+          <i>Office Hours:</i>
+          Because of my schedule, I will not be able to hold weekly office hours
+          at a regularly scheduled time. If you would like to speak with me
+          directly, please reach out over email and we will find a time that
+          works for both of us. I am hoping to meet all of you over the course
+          of the semester so I can learn more about the experiences you bring to
+          this course and what you are hoping to get out of it. To incentivize
+          this, I will give anyone who meets with me during office hours, an
+          additional 5/5 assignment points. You can also schedule office hours
+          for any topic you wish, even beyond this class, including advice on
+          working as a software/data engineer.
+        </li>
+        <li>
+          <i>Recording Lectures:</i>
+          Please do not record my lectures. I understand during this zoom era
+          that you may want to screen record the lectures. I hope you recognize
+          that it is uncomfortable to be recorded on video. If you need an
+          accomodation/exception to this policy, just let me know and we'll get
+          that squared away.
+        </li>
+        <li>
+          <i>Special Accomodations:</i>
+          This class will be digital, but if you need any accomodations to make
+          this course accessible, please do not hesitate to reach out.
+        </li>
+      </ul>
+      <h2>Homework/Grading Policies</h2>
+      <ul>
+        <li>
+          <i>Course Grade Structure:</i>
+          There are two possible structures for your grade in this class and the
+          choice is yours! Option 1: 100% of your grade is exclusively the sum
+          of the total points you earn on homework assignments divided by the
+          total number of possible points. Option 2: 75% of your grade is the
+          sum of the total points you earn on homework assignments divided by
+          the total possible points and the remaining 25% is your score on the
+          optional final exam. I am building in this flexibility so that
+          students who find the pressure of exams overwhelming do not need to
+          put themselves through it and students who find homework annoying have
+          another mechanism to demonstrate their knowledge!
+        </li>
+        <li>
+          <i>Late Homework:</i>
+          I will not be able to accept homework assignments more than three days
+          (72 hours) after its due date because I will post the answer key. Each
+          day an assignment is late, I will deduct 10% from the assignments
+          total. If you are not able to submit an assignment on time, please
+          speak with me directly.
+        </li>
+        <li>
+          <i>Dropped Assignment:</i>
+          You are allowed to drop a homework assignment of your choosing from
+          your overall grade calculation. There may be an assignment that I do
+          not allow any one to drop; I will make it clear when I assign an
+          assignment that is "undroppable".
+        </li>
+        <li>
+          <i>Extra Credit:</i>
+          Extra credit assignments. If you feel that your grade isn't as high as
+          you are hoping it is and you want the opportunity to submit an extra
+          credit assignment, please reach out to me directly. We will discuss
+          which part of the class you find most interesting and design an
+          assignment based on it. I will then make that extra credit assignment
+          available to all of the students in the class.
+        </li>
+      </ul>
+    </div>
+    <div>
+      <h2>Teaching Philosophy and Inspiration</h2>
+      <p>
+        I have been lucky in that, thanks to several amazing teachers, I have
+        felt comfortable in the classroom and was often that student raising
+        their hand asking a million questions. When I transitioned to the
+        teaching side of the classroom, I discovered that I loved answering
+        those questions and soon became addicted to helping students. I hope to
+        foster a community of learners in our digital classroom, where students
+        feel comfortable asking quesitons, challenging me to offer a clearer
+        explanation, and respecting one another. I don't believe in a heavy
+        divide between teacher and student in the classroom. Rather, I see it as
+        my responsibility to guide us through the content and I hope to empower
+        each of you to take an active role in your education. I hope throughout
+        this class you take time to stop and deeply explore ideas you find
+        interesting and compelling. If you are interested in some of the
+        pedagogy behind the classroom, check out
+        <i>Teaching to Transgress</i> by bell hooks.
+      </p>
+    </div>
+  </body>
+</html>
