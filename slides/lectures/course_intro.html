@@ -475,19 +475,71 @@ def decode(encrypted_secret, key):
           </section>
         </section>
         <section>
-          <h1>REU Funding Opportunity</h1>
+          <section>
+            <h1>One Time Pads</h1>
+          </section>
+          <section>
+            <h3>OTP Mechanism</h3>
+            <ul>
+              <li class="fragment">
+                Like a Vigenere cipher with a key as long as the message.
+              </li>
+              <li class="fragment">
+                <pre><code>Key = {0, 1}n
+Message = {0, 1}n 
+EncryptedMessage = {0, 1}n</code>
+<code>Message = Key XOR EncryptedMessage
+EncryptedMessage = Key XOR Message</code></pre>
+              </li>
+            </ul>
+          </section>
+          <section>
+            <h3>OTP Security</h3>
+            <ul>
+              <li class="fragment">
+                Given a ciphertext, an adverserial attacker will learn nothing
+                about the original message.
+              </li>
+              <li class="fragment">
+                Early cryptography relied on intuition, but intuition is
+                incomplete.
+              </li>
+              <li class="fragment">
+                Lets translate this definition into something more mathematical
+              </li>
+              <li class="fragment">
+                Given a cipher text C, the probably that it is the encryption of
+                any two messages M is equally likely
+              </li>
+            </ul>
+          </section>
+          <section>
+            <h3>OTP Weaknesses</h3>
+            <ul>
+              <li class="fragment">
+                Can only be used once.
+                <span class="fragment"
+                  >(if you uses the same pad on two messages and xor those two
+                  messages together, you learn the xor of those two
+                  messages)</span
+                >
+              </li>
+              <li class="fragment">
+                No integrity!
+                <span class="fragment"
+                  >If you remember from before, it is important that we can
+                  demonstrate messages were not tampered with.</span
+                >
+              </li>
+              <li class="fragment">
+                The way you can break integrity is just xoring the encrypted
+                text with another random key.
+              </li>
+            </ul>
+          </section>
         </section>
-
         <section>
-          <h2>Point of View</h2>
-          <p>Press <strong>ESC</strong> to enter the slide overview.</p>
-          <p>
-            Hold down the <strong>alt</strong> key (<strong>ctrl</strong> in
-            Linux) and click on any element to zoom towards it using
-            <a href="http://lab.hakim.se/zoom-js">zoom.js</a>. Click again to
-            zoom back out.
-          </p>
-          <p>(NOTE: Use ctrl + click in Linux.)</p>
+          <h1>REU Funding Opportunity</h1>
         </section>
       </div>
     </div>
