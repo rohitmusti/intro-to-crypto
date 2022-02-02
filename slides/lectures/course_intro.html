@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>Course Introduction | Intro to Crypto</title>
+
+    <meta
+      name="description"
+      content="A framework for easily creating beautiful presentations using HTML"
+    />
+    <meta name="author" content="Hakim El Hattab" />
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="../dist/reset.css" />
+    <link rel="stylesheet" href="../dist/reveal.css" />
+    <link rel="stylesheet" href="../dist/theme/black.css" id="theme" />
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="../plugin/highlight/monokai.css" />
+  </head>
+
+  <body>
+    <div class="reveal">
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+        <section>
+          <h2>Introduction to Cryptography</h2>
+          <h5>Spring 2022</h5>
+          <p>
+            <small
+              >Created by
+              <a href="https://rohitmusti.github.io/">Rohit Musti</a>
+            </small>
+          </p>
+          <h5>Course Introduction & A Brief History</h5>
+        </section>
+        <section>
+          <section>
+            <h1>About Me</h1>
+          </section>
+          <section>
+            <h2>Fun Facts</h2>
+            <ul>
+              <li class="fragment">
+                My name is Rohit Musti and I work as a Software & Data Engineer
+                at American Forests.
+              </li>
+              <li class="fragment">
+                I built tools like
+                <a href="https://treeeqeuityscore.org/"
+                  >the Tree Equity Score</a
+                >
+              </li>
+              <li class="fragment">
+                I love to rock climb (lead climbing especially)!
+              </li>
+              <li class="fragment">
+                I am also an enthusiastic amateur bike mechanic! I volunteer at
+                a free bike repair clinic on the weekends.
+              </li>
+            </ul>
+          </section>
+          <section>
+            <h2>Teaching History</h2>
+            <ul>
+              <li class="fragment">
+                Teaching Assistant: Introduction to Computer Science
+              </li>
+              <li class="fragment">
+                Student Teacher:
+                <a href="https://cs1501-spatialreasoning.github.io/"
+                  >Spatial Reasoning</a
+                >
+              </li>
+              <li class="fragment">Head Teaching Assistant: Algorithms</li>
+              <li class="fragment">
+                Graduate Student Teacher:
+                <a href="https://digitalgovlab.github.io/Fall2019/"
+                  >Digital Governance</a
+                >
+              </li>
+              <li class="fragment">
+                Graduate Teaching Assistant: Introduction to Cryptography
+              </li>
+            </ul>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>Course Goals</h1>
+          </section>
+          <section>
+            <h3>Course Goal</h3>
+            <p>
+              <span class="fragment"
+                >To develop a strong foundation of cryptographic primitives so
+                that</span
+              >
+              <span class="fragment"
+                >you can continue on to further academic study</span
+              >
+              <span class="fragment">or continue on to work in the field.</span>
+            </p>
+            <p class="fragment">
+              At the very least, I hope you feel comfortable explaining
+              cryptographic ideas to your friends and family.
+            </p>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>Course Policies</h1>
+          </section>
+          <section>
+            <h2>Course Contract</h2>
+            <ul>
+              <li class="fragment">
+                I as the instructor agree to provide you with the resources to
+                succeed and thrive.
+              </li>
+              <li class="fragment">
+                As the student, you agree to do your best to achieve your goals
+                in this class and follow all course policies.
+              </li>
+            </ul>
+          </section>
+          <section>
+            <h2>Course Honor Code</h2>
+            <ul>
+              <li class="fragment"><i>I will not lie, cheat, or steal.</i></li>
+              <li class="fragment">
+                I want to develop a trusting environment and will not be looking
+                over your shoulder, scouring your papers for potential
+                plagarism, or try to trip you up.
+              </li>
+              <li class="fragment">
+                If you are feeling stressed, please reach out and try not to
+                make any decisions out of desperation.
+              </li>
+            </ul>
+          </section>
+          <section>
+            <h2>Course Attendance</h2>
+            <ul>
+              <li class="fragment">Course attendance is not mandatory.</li>
+              <li class="fragment">
+                I will do my best to record lectures (more on this later).
+              </li>
+              <li class="fragment">
+                All course slides and materials will be made available at least
+                one day after the lecture.
+              </li>
+              <li class="fragment">
+                I strongly encourage attending and will do my best to make this
+                entertaining and useful enough to encourage that!
+              </li>
+            </ul>
+          </section>
+          <section>
+            <h2>Course Errors</h2>
+            <ul>
+              <li class="fragment">
+                If you find any mistake in the course website, slides,
+                homeworks, or related materials and bring it up to me, I will
+                award you up to 5% of extra credit.
+              </li>
+              <li class="fragment">
+                I will award an extra 2% if you make a pull request to the
+                course github repository to correct the problem.
+              </li>
+              <li class="fragment">
+                This is a first come first serve policy (i.e. if another student
+                points out an error before you do, they will get the credit).
+              </li>
+            </ul>
+          </section>
+          <section>
+            <h2>Office Hours</h2>
+            <ul>
+              <li class="fragment">These are by appointment (please email).</li>
+              <li class="fragment">
+                An extra 5/5 assignment points to anyone who meets with me at
+                least once.
+              </li>
+              <li class="fragment">
+                Office hours is not limited to course content! We can discuss
+                topics including but not limited to, careers in software
+                engineering, graduate school, or other struggles/stresses that
+                are weighing you down.
+              </li>
+            </ul>
+          </section>
+          <section>
+            <h2>Recording Lectures</h2>
+            <ul>
+              <li class="fragment">
+                It is a little bit uncomfortable to be recorded.
+              </li>
+              <li class="fragment">
+                Please do not record me without my express written permission.
+              </li>
+              <li class="fragment">
+                I will do my best to record these lectures and post them for
+                your viewing pleasure.
+              </li>
+              <li class="fragment">
+                <i>Special Accomodations:</i> If you need a separate special
+                accomodation for recording or note taking, please just let me
+                know and we can work it out.
+              </li>
+            </ul>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>Homework/Grade Policies</h1>
+          </section>
+          <section>
+            <h2>Course Grade Structure</h2>
+            <div class="fragment">
+              <pre>
+                <code>sum(earned_points)/sum(total_points)</code>
+				  </pre
+              >
+            </div>
+            <div class="fragment">or</div>
+            <div class="fragment">
+              <pre>
+                <code
+                  >0.75 * sum(earned_points)/sum(total_points) + 
+0.25 * (final_exam_score)</code>
+				  </pre>
+            </div>
+          </section>
+          <section>
+            <h2>Late Homework</h2>
+            <ul>
+              <li class="fragment">Homework must be submitted on time.</li>
+              <li class="fragment">
+                5 total late days throughout the semester. Max of three days per
+                submission.
+              </li>
+            </ul>
+          </section>
+          <section>
+            <h2>Dropped Assignment</h2>
+            <ul>
+              <li class="fragment">
+                You are allowed to drop one homework assignment from your
+                overall grade.
+              </li>
+              <li class="fragment">
+                There may be some "undroppable" assignments, I will label them
+                clearly when assigned.
+              </li>
+            </ul>
+          </section>
+          <section>
+            <h2>Extra Credit</h2>
+            <ul>
+              <li class="fragment">
+                If your grade isn't as high as you like, we can have a one on
+                one conversation about adding additional assignments.
+              </li>
+              <li class="fragment">
+                We will pick a topic in the course you find interesting and
+                design an assignment around it. I will then make that extra
+                credit available to the entire course.
+              </li>
+            </ul>
+          </section>
+          <section>
+            <h2>Miscellaneous</h2>
+            <ul>
+              <li class="fragment">
+                If you try and hack any grading system or set of test cases I
+                set up, you will immediately fail the class.
+              </li>
+              <li class="fragment">
+                Collaboration is allowed on assignments, but everyone who
+                collaborates will need to list all collaborators on their
+                assignment and briefly describe (1 - 2 sentences) the sections
+                they collaborated on.
+              </li>
+            </ul>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>Overview of Cryptography</h1>
+          </section>
+          <section>
+            <h2>What is Cryptography?</h2>
+            <ul>
+              <li class="fragment">
+                Let's pretend we have two protagonists: Alice and Bob.
+              </li>
+              <li class="fragment">
+                Alice wants to send Bob a message but she has pass the note
+                through an unsafe medium
+              </li>
+              <li class="fragment">
+                The aim of cryptography is to provide Alice with the primitives
+                (aka tools) to encrypt her messages such that:
+                <span class="fragment"
+                  >no one can eavesdrop on her communication with Bob</span
+                >
+                <span class="fragment"
+                  >and no one can tamper with the communication.</span
+                >
+              </li>
+              <li class="fragment">
+                Definition: secure communication through untrusted mediums
+              </li>
+            </ul>
+          </section>
+          <section>
+            <h2>What are Cryptography's applications?</h2>
+            <ul>
+              <li class="fragment">Digital Signatures</li>
+              <li class="fragment">Anonymous Communication</li>
+              <li class="fragment">Multiparty computation</li>
+              <li class="fragment">
+                Anonymous Cash
+                <span class="fragment">(not cryptocurrencies)</span>
+              </li>
+              <li class="fragment">
+                Private computation on untrusted hardware.
+              </li>
+              <li class="fragment">Zero-knowledge systems</li>
+              <li class="fragment">And many more...</li>
+            </ul>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>History of Cryptography</h1>
+          </section>
+          <section>
+            <h3>Heiroglyphics (~1900 BC)</h3>
+            <ul>
+              <li class="fragment">
+                Kings and their scribes would write messages in Heiroglyphics
+                which was only known to them.
+              </li>
+            </ul>
+            <h3 class="fragment">Flaws in Heiroglyphics?</h3>
+            <ul>
+              <li class="fragment">
+                Anyone who learned this "code" could read them plain as day.
+              </li>
+              <li class="fragment">
+                Modern day equivalent to writing a message in Arabic and just
+                hoping that no one can read it.
+              </li>
+            </ul>
+          </section>
+          <section>
+            <h3>Caesar Cipher (~100 BC)</h3>
+            <ul>
+              <li class="fragment">
+                Used by Caesar to communicate to his generals
+              </li>
+              <li class="fragment">shift numbers over by 3</li>
+            </ul>
+            <div class="fragment">
+              <pre>
+					  <code data-line-numbers="1-3|5-10|12-17">alphabet = ["a", "b", "c", ... , "z"]
+secret = "hello"
+shift = 3
+
+def encode_message(plain_secret, shift):
+	encrypted_message = ""
+	for i in range(len(plain_secret)):
+		curr_index = alphabet.index(plain_secret[i])
+		encrypted_message += alphabet[(3 + curr_index) % 26]
+	return encrypted_message
+
+def decode_message(encrypted_secret, shift):
+	plain_message = ""
+	for i in range(len(encrypted_secret)):
+		curr_index = alphabet.index(encrypted_secret[i])
+		new_message += alphabet[(current_index - 3) % 26]
+	return plain_message</code>
+				  </pre>
+            </div>
+          </section>
+          <section>
+            <h3>Flaws in Caesar?</h3>
+            <ul>
+              <li class="fragment">only 26 keys, easy to brute force</li>
+              <li class="fragment">
+                A common flaw is that heiroglyphics rely on secrecy of the
+                system, not necessarily the keys
+              </li>
+            </ul>
+          </section>
+          <section>
+            <h3>Vigenere Cipher (~1500 AD)</h3>
+            <ul>
+              <li class="fragment">First to use a key</li>
+              <li class="fragment">
+                Essentially Caesars but with a longer key
+              </li>
+              <li class="fragment">
+                Key must be less than the length of the message
+              </li>
+            </ul>
+            <div class="fragment">
+              <pre>
+					<code data-line-numbers="1-3|5-12|14-21">alphabet = ["a", "b", "c", ... , "z"]
+key = "abc"
+secret = "hello"
+
+def encrypt(plain_secret, key):
+	encrypted_secret = ""
+	shifts = [alphabet.index(key[i % len(key)]) for i in len(plain_secret)]
+	for i in range(len(plain_secret)):
+		shift = shift[i]
+		curr_index = alphabet.index(plain_secret[i])
+		encrypted_secret += alphabet[(curr_index + shift) % 26]
+	return encrypted_secret
+
+def decode(encrypted_secret, key):
+	plain_secret = ""
+	shifts = [alphabet.index(key[i % len(key)]) for i in len(encrypted_secret)]
+	for i in range(len(encrypted_secret)):
+		shift = shift[i]
+		curr_index = alphabet.index(encrypted_secret[i])
+		plain_secret += alphabet[(curr_index - shift) % 26]
+	return plain_secret</code>
+				</pre>
+            </div>
+          </section>
+          <section>
+            <h3>Flaws in Vigenere?</h3>
+            <ul>
+              <li class="fragment">
+                If we knew the key length, we can break using something known as
+                frequency analysis
+              </li>
+              <li class="fragment">
+                If we didn't know the key length, we can break by trying all key
+                lengths
+              </li>
+            </ul>
+          </section>
+          <section>
+            <h3>Enigma Machine</h3>
+            <ul>
+              <li class="fragment">
+                Similar to other substitution cyphers, except using multiple
+                rotating rotors.
+              </li>
+              <li class="fragment">Vulnerable to frequency analysis as well</li>
+            </ul>
+          </section>
+          <section>
+            <h3>Modern Cryptography</h3>
+            <ul>
+              <li class="fragment">One Time Pad</li>
+              <li class="fragment">Symmetric Key Cryptography</li>
+              <li class="fragment">Public/Private Key Cryptography</li>
+              <li class="fragment">Zero Knowledge</li>
+              <li class="fragment">Multi Party Computation</li>
+            </ul>
+          </section>
+        </section>
+        <section>
+          <h1>REU Funding Opportunity</h1>
+        </section>
+
+        <section>
+          <h2>Point of View</h2>
+          <p>Press <strong>ESC</strong> to enter the slide overview.</p>
+          <p>
+            Hold down the <strong>alt</strong> key (<strong>ctrl</strong> in
+            Linux) and click on any element to zoom towards it using
+            <a href="http://lab.hakim.se/zoom-js">zoom.js</a>. Click again to
+            zoom back out.
+          </p>
+          <p>(NOTE: Use ctrl + click in Linux.)</p>
+        </section>
+      </div>
+    </div>
+
+    <script src="../dist/reveal.js"></script>
+    <script src="../plugin/zoom/zoom.js"></script>
+    <script src="../plugin/notes/notes.js"></script>
+    <script src="../plugin/search/search.js"></script>
+    <script src="../plugin/markdown/markdown.js"></script>
+    <script src="../plugin/highlight/highlight.js"></script>
+    <script>
+      // Also available as an ES module, see:
+      // https://revealjs.com/initialization/
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        center: true,
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [
+          RevealZoom,
+          RevealNotes,
+          RevealSearch,
+          RevealMarkdown,
+          RevealHighlight,
+        ],
+      });
+    </script>
+  </body>
+</html>
