@@ -1,0 +1,100 @@
+
+
+\documentclass{beamer}
+ 
+\usepackage[utf8]{inputenc}
+\usepackage{mathtools}
+
+\usetheme{CambridgeUS}
+\useoutertheme{split}
+\setbeamertemplate{title page}[default][colsep=-4bp,rounded=true]
+ 
+%Information to be included in the title page:
+\title{Stream Ciphers}
+\author{Rohit Musti}
+\institute{CUNY - Hunter College}
+\date{\today}
+ 
+\begin{document}
+ 
+\frame{\titlepage}
+
+
+\begin{frame}
+\frametitle{Overview}
+\begin{itemize}
+    \item We just introduced the concept of semantic security, but referred to it rather obliquely. \pause
+    \item While we feel comfortable with its mechanisms, we have not defined an actual cipher that meets its requirements using short keys. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Pseudo-Random Generators (PRG)}
+\begin{itemize}
+    \item So the primary challenge of using short keys of length \(\ell\) is deriving longer keys that allow us to encrypt messages of length \(L\). \pause 
+    \item An PRG can be described as \[ G: \ell \rightarrow L\] \pause
+    \item Modified OTP based on a secure PRG: \[ E(s, m) = G(s) \oplus m\] \pause \[ D(s, c) = G(s) \oplus c \]
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Security of Modified OTP}
+\begin{itemize}
+    \item The security rests on whether or not \(G(s)\) can be distinguished from \(k\) where \(s \in \{0, 1\}^{\ell}\) and \(k \in \{0, 1\}^{L}\) \pause
+    \item What is convenient is that if we prove this to be true, then we can inherit the semantic security from the original OTP! 
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{PRG Security Game}
+\begin{itemize}
+    \item Let \(S \coloneqq \{0, 1\}^{\ell}\) and \(K \coloneqq \{0, 1\}^{L}\), s.t. \(\ell < L\). Let our adversary \(A\) be computationally bounded. \pause
+    \item If experiment 0, challenger samples \(s \xleftarrow[]{R} S\) and generates \(G(s) = k\) and sends to \(\mathcal{A}\). \pause If experiment 1, challenger samples \(k \xleftarrow[]{R} K\) and sends to \(\mathcal{A}\). \pause
+    \item \(\mathcal{A}\) returns \(b\), guessing which experiment the challenger conducted. \pause
+\end{itemize}
+
+The PRG advantage of \(\mathcal{A}\): \(PRGA[\mathcal{A}, G] = |Pr[W_0] - Pr[W_1]|\) where \(W_b\) is the probability that \(\mathcal{A}\) outputs 1 during experiment \(b\).
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Takeaways}
+\begin{itemize}
+    \item If we have a secure PRG, then we can encrypt messages efficiently given a key shorter than the message. \pause
+    \item We don't actually know if PRGs exist. Proving that they exist would demonstrate that \(P = NP\).
+    \item This is the bulk of cryptography: we assume that certain problems are hard and use those hardness properties to develop secure protocols.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+   \frametitle{Content Scrambling System: DVDs}
+   \begin{itemize}
+       \item Idea: approximate PRG by using Linear Feedback Shift Registers (LFSR) \pause
+       \item This a very weak approximation \pause
+       \item This disadvantage was compounded by the fact that it was illegal in the United States for manufacturers to export cryptographic systems with keys exceeding 40 bits. \pause
+       \item I wonder which US government actor is interested in people not having strong encryption... hmm... beats me ;)
+   \end{itemize}
+\end{frame}
+
+\begin{frame}
+   \frametitle{Breaking CSS}
+   \begin{itemize}
+   \item Idea: use the stream output bytes and the outputs of one of the smaller LFSRs to obtain the output of another one of the LFSRs. \pause
+   \item Mechanism: you brute force guess the smaller LFSR and each guess forces the state of the larger LFSRs, you can check if the output matches to vaildate. \pause
+   \item This is better than brute forcing the whole key \(2^{40}\), \pause by 1999 the full key-recovery attack ran in 18 seconds. \pause
+   \item Great article in WIRED about this \href{https://www.wired.com/1999/11/why-the-dvd-hack-was-a-cinch/}{click here}
+   \end{itemize}
+\end{frame}
+
+\begin{frame}
+   \frametitle{Other Examples}
+   \begin{itemize}
+    \item GSM encryption (uses 2 LSFRs), they tried to keep this design private but it was eventually reverse engineered and attacks were found \pause a key lesson here is to never rely on security through obscurity. \pause
+    \item The Snowden documents revealed that the NSA can process data encrypted with A5/1 (uses 3 LSFRs) \pause (important to know that there were known attacks on this protocol well before the NSA was known to have cracked it) \pause
+    \item Bluetooth E0 (uses 4 LSFRs) has been broken \pause
+    \item RC4 cypher, used in SSL/TLS is also broken (though not as badly)
+   \end{itemize}
+\end{frame}
+
+ 
+\end{document}
