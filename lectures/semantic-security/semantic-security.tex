@@ -42,7 +42,7 @@
 \begin{frame}
 \frametitle{Shannon Cipher}
 \begin{itemize}
-    \item \textbf{Definition:} a Shannon Cipher is a pair of functions \((E, D)\)\pause
+    \item \textbf{Definition:} a Shannon Cipher is a pair of functions \(\mathcal{E} = (E, D)\)\pause
     \item The \(E\) function takes in two arguments: a key \(k\) and a message \(m\), and produces a ciphertext \(c\) \[c = E(k, m)\] \pause
     \item The \(D\) function takes in two arguments: a key \(k\) and a ciphertext \(c\), and produces a plaintext \(m\) \pause
     \item While \(E\) maybe random, \(D\) must be deterministic
@@ -54,17 +54,17 @@
 \frametitle{Shannon Cipher: Correctness}
 \begin{itemize}
     \item Decryption must \textit{undo} Encryption \pause \[m = D(k, E(k, m))\]
-    \item More formally: let \(K\) be the key space, \(M\) be the message space, and \(C\) be the ciphertext space.
-    \pause \[E: K \times M \rightarrow C\]
-    \pause \[D: K \times C \rightarrow M\] \pause
-    \item \(\varepsilon\) is defined over \((K, M, C)\)
+    \item More formally: let \(\mathcal{K}\) be the key space, \(M\) be the message space, and \(\mathcal{C}\) be the ciphertext space.
+    \pause \[E: \mathcal{K} \times \mathcal{M} \rightarrow \mathcal{C}\]
+    \pause \[D: \mathcal{K} \times \mathcal{C} \rightarrow \mathcal{M}\] \pause
+    \item \(\mathcal{E}\) is defined over \((\mathcal{K}, \mathcal{M}, \mathcal{C})\)
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Revisit: The One Time Pad}
 \begin{itemize}
-    \item A one time pad is a Shannon Cipher s.t. \[K \coloneqq M \coloneqq C \coloneqq \{0, 1\}^{\mathnormal{L}} \]\pause
+    \item A one time pad is a Shannon Cipher s.t. \[\mathcal{K} \coloneqq \mathcal{M} \coloneqq \mathcal{C} \coloneqq \{0, 1\}^{\mathnormal{L}} \]\pause
     \item Encryption for a key \(k \in \{0,1\}^{\mathnormal{L}}\) and a message \(m \in \{0,1\}^{\mathnormal{L}}\):\[E(k, m) \coloneqq k \oplus m \]\pause
     \item Decryption for a key \(k \in \{0,1\}^{\mathnormal{L}}\) and a ciphertext \(c \in \{0,1\}^{\mathnormal{L}}\):\[D(k, c) \coloneqq k \oplus c \]\pause
     \item Future HW: Write out a mathmatical justification that the one time pad meets the earlier correctness requirement (Decryption \textit{undoes} Encryption)
@@ -74,9 +74,9 @@
 \begin{frame}
 \frametitle{Security Requirements 1}
 \begin{itemize}
-    \item key assumption: adversaries know the encryption mechanism and distribution of \(K\)\pause
+    \item key assumption: adversaries know the encryption mechanism and distribution of \(\mathcal{K}\)\pause
     \item If Alice encrypts a message \(m\) with a key \(k\) and an adversary obtains the ciphertext \(c\), the key \(k\) needs to be hard to guess \pause (if \(k\) is easy to guess, then the adversary will just guess until they discover \(k\)). \pause
-    \item Thus, \(k\) must be chosen uniformly \& random from a large keyspace \(K\) 
+    \item Thus, \(k\) must be chosen uniformly \& random from a large keyspace \(\mathcal{K}\) 
 \end{itemize}
 \end{frame}
 
@@ -94,15 +94,15 @@
 \frametitle{Perfect Security}
 \begin{itemize}
     \item Assumption: a key is drawn uniformly and randomly from a large key space: \(\textbf{k}\). \pause
-    \item Let \((E, D)\) be a Shannon Cipher defined over \((K, M, C)\) \pause
-    \item If for all \(m_0, m_1 \in M\), for all \(c \in C\), and \(\textbf{k} \xleftarrow[]{R} K\) we have \[Pr[E(\textbf{k}, m_0) = c] = Pr[E(\textbf{k}, m_1) = c] \]
+    \item Let \(\mathcal{E} = (E, D)\) be a Shannon Cipher defined over \((\mathcal{K}, \mathcal{M}, \mathcal{C})\) \pause
+    \item If for all \(m_0, m_1 \in \mathcal{M}\), for all \(c \in \mathcal{C}\), and \(\textbf{k} \xleftarrow[]{R} \mathcal{K}\) we have \[Pr[E(\textbf{k}, m_0) = c] = Pr[E(\textbf{k}, m_1) = c] \]
 \end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{One Time Pad: Perfectly Security}
+\frametitle{One Time Pad: Perfect Security}
 \begin{itemize}
-    \item A result of our definition of perfect security is \[ | \{ k \xleftarrow[]{R} K: E(k, m) = c \} | = N_c \] \pause
+    \item A result of our definition of perfect security is \[ | \{ k \xleftarrow[]{R} \mathcal{K}: E(k, m) = c \} | = N_c \] \pause
     \item For any message \(m \in \{0, 1\}^{\mathnormal{l}}\) and cipher text \(c \in \{0, 1\}^{\mathnormal{l}}\), \[ k \oplus m = c \] \pause thus, \(N_c = 1\), satisfiying the above result.
 \end{itemize}
 \end{frame}
@@ -110,7 +110,7 @@
 \begin{frame}
 \frametitle{Problems with Perfect Security}
 \begin{itemize}
-    \item Let \((E, D)\) be a Shannon Cipher defined over \((K, M, C)\), if this cipher is perfectly secure, then \(|K| \geq |M|\) \pause
+    \item Let \(\mathcal{E} = (E, D)\) be a Shannon Cipher defined over \((\mathcal{K}, \mathcal{M}, \mathcal{C})\), if this cipher is perfectly secure, then \(|\mathcal{K}| \geq |\mathcal{M}|\) \pause
     \item It is impractical to have keys that are at least as large as the size of the message we are transmitting . \pause
     \item Really, what we are concerned about are real world, computationally bounded adversaries. \pause
     \item We are also interested in efficient algorithms for encrypting and decrypting. By efficient, we mean polynomial functions.
@@ -146,7 +146,7 @@
     \begin{itemize}
         \item Let \(\mathcal{E} = (E, D)\) be a semantically secure cipher defined over \((\mathcal{K}, \mathcal{M}, \mathcal{C})\) and let our adversary \(\mathcal{A}\) be computationally bounded \pause
         \item Challenger generates \(k \xleftarrow[]{R} \mathcal{K}\), \(m \xleftarrow[]{R} \mathcal{M}\) and computes \(E(k, m) = c\) and send \(c\) to the adversary \(\mathcal{A}\) \pause
-        \item \(\mathcal{A}\) outputes message \(m^{*}\) \pause
+        \item \(\mathcal{A}\) outputes message \(m^{*}\) 
     \end{itemize} 
 \end{frame}
 
@@ -175,7 +175,7 @@
         \item \(router_2\) decrypts and sends the message \(m\) to Bob in random order.\pause
     \end{itemize} 
     
-    Alice's security is \(1 \ n\) where \(n\) is the number of messages sent along the network.
+    Alice's security is \(1 / n\) where \(n\) is the number of messages sent along the network.
 
 \end{frame}
 
