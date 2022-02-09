@@ -424,7 +424,7 @@ def encrypt(plain_secret, key):
 	encrypted_secret = ""
 	shifts = [alphabet.index(key[i % len(key)]) for i in len(plain_secret)]
 	for i in range(len(plain_secret)):
-		shift = shift[i]
+		shift = shifts[i]
 		curr_index = alphabet.index(plain_secret[i])
 		encrypted_secret += alphabet[(curr_index + shift) % 26]
 	return encrypted_secret
