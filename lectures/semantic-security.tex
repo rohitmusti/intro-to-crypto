@@ -1,0 +1,183 @@
+
+
+\documentclass{beamer}
+ 
+\usepackage[utf8]{inputenc}
+\usepackage{mathtools}
+
+\usetheme{CambridgeUS}
+\useoutertheme{split}
+\setbeamertemplate{title page}[default][colsep=-4bp,rounded=true]
+ 
+%Information to be included in the title page:
+\title{Semantic Security}
+\author{Rohit Musti}
+\institute{CUNY - Hunter College}
+\date{\today}
+ 
+\begin{document}
+ 
+\frame{\titlepage}
+
+
+\begin{frame}
+\frametitle{Overview}
+\begin{itemize}
+    \item Alice and Bob share a secret key \(k\). \pause
+    \item Alice wants to send a message \(m\) to Bob through an untrusted medium. \pause
+    \item Mechanism: Shannon Ciphers.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Who is Claude Shannon?}
+\begin{itemize}
+    \item Father of Information Theory \pause
+    \item Friends with Alan Turing (they actually compared notes on Turing's famous paper the Universal Turing machine) \pause
+    \item Estimated the complexity of chess \pause
+    \item First to formalize the notion of security
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Shannon Cipher}
+\begin{itemize}
+    \item \textbf{Definition:} a Shannon Cipher is a pair of functions \((E, D)\)\pause
+    \item The \(E\) function takes in two arguments: a key \(k\) and a message \(m\), and produces a ciphertext \(c\) \[c = E(k, m)\] \pause
+    \item The \(D\) function takes in two arguments: a key \(k\) and a ciphertext \(c\), and produces a plaintext \(m\) \pause
+    \item While \(E\) maybe random, \(D\) must be deterministic
+    \[m = D(k, c)\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Shannon Cipher: Correctness}
+\begin{itemize}
+    \item Decryption must \textit{undo} Encryption \pause \[m = D(k, E(k, m))\]
+    \item More formally: let \(K\) be the key space, \(M\) be the message space, and \(C\) be the ciphertext space.
+    \pause \[E: K \times M \rightarrow C\]
+    \pause \[D: K \times C \rightarrow M\] \pause
+    \item \(\varepsilon\) is defined over \((K, M, C)\)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Revisit: The One Time Pad}
+\begin{itemize}
+    \item A one time pad is a Shannon Cipher s.t. \[K \coloneqq M \coloneqq C \coloneqq \{0, 1\}^{\mathnormal{L}} \]\pause
+    \item Encryption for a key \(k \in \{0,1\}^{\mathnormal{L}}\) and a message \(m \in \{0,1\}^{\mathnormal{L}}\):\[E(k, m) \coloneqq k \oplus m \]\pause
+    \item Decryption for a key \(k \in \{0,1\}^{\mathnormal{L}}\) and a ciphertext \(c \in \{0,1\}^{\mathnormal{L}}\):\[D(k, c) \coloneqq k \oplus c \]\pause
+    \item Future HW: Write out a mathmatical justification that the one time pad meets the earlier correctness requirement (Decryption \textit{undoes} Encryption)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Security Requirements 1}
+\begin{itemize}
+    \item key assumption: adversaries know the encryption mechanism and distribution of \(K\)\pause
+    \item If Alice encrypts a message \(m\) with a key \(k\) and an adversary obtains the ciphertext \(c\), the key \(k\) needs to be hard to guess \pause (if \(k\) is easy to guess, then the adversary will just guess until they discover \(k\)). \pause
+    \item Thus, \(k\) must be chosen uniformly \& random from a large keyspace \(K\) 
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Security Requirements 2}
+\begin{itemize}
+    \item key assumption: adversaries may have some knowledge of the message being encrypted. \pause
+    \item Supposed \(m_0 = meet\_at\_lunch\_time\) and \(m_1 = meet\_at\_snack\_time\), \pause our adversary has a 50\% chance of guessing correctly. \pause
+    \item A secure cipher text should not increase this probability of guessing correctly. \pause
+    \item Suppose there are \(90\) keys \(k_0\) s.t. \(E(k_0, m_0) = c\) and \(10\) keys \(k_1\) s.t. \(E(k_1, m_1) = c\), \pause the probability that a given message \(c\) is \(m_0\) is \(90 / (90 + 10) = 90\%\), increasing our adversaries odds of guessing correctly.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Perfect Security}
+\begin{itemize}
+    \item Assumption: a key is drawn uniformly and randomly from a large key space: \(\textbf{k}\). \pause
+    \item Let \((E, D)\) be a Shannon Cipher defined over \((K, M, C)\) \pause
+    \item If for all \(m_0, m_1 \in M\), for all \(c \in C\), and \(\textbf{k} \xleftarrow[]{R} K\) we have \[Pr[E(\textbf{k}, m_0) = c] = Pr[E(\textbf{k}, m_1) = c] \]
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{One Time Pad: Perfectly Security}
+\begin{itemize}
+    \item A result of our definition of perfect security is \[ | \{ k \xleftarrow[]{R} K: E(k, m) = c \} | = N_c \] \pause
+    \item For any message \(m \in \{0, 1\}^{\mathnormal{l}}\) and cipher text \(c \in \{0, 1\}^{\mathnormal{l}}\), \[ k \oplus m = c \] \pause thus, \(N_c = 1\), satisfiying the above result.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Problems with Perfect Security}
+\begin{itemize}
+    \item Let \((E, D)\) be a Shannon Cipher defined over \((K, M, C)\), if this cipher is perfectly secure, then \(|K| \geq |M|\) \pause
+    \item It is impractical to have keys that are at least as large as the size of the message we are transmitting . \pause
+    \item Really, what we are concerned about are real world, computationally bounded adversaries. \pause
+    \item We are also interested in efficient algorithms for encrypting and decrypting. By efficient, we mean polynomial functions.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Semantic Security}
+    Intuition: the probability that a computationally bounded adversary can learn anything about a message \(m\) given its cipher text \(c\) is negligible. \pause
+    Experiment \(b\)
+    \begin{itemize}
+        \item Let \(\mathcal{E} = (E, D)\) be a Cipher defined over \((\mathcal{K}, \mathcal{M}, \mathcal{C})\) and let our adversary \(\mathcal{A}\) be computationally bounded \pause
+        \item \(\mathcal{A}\) picks \(m_0, m_1 \in \mathcal{M}\) and sends to challenger \pause
+        \item Challenger selects \(k \xleftarrow[]{R} \mathcal{K}\) \pause
+        \item Challenger computes \(E(k, m_b) \coloneqq c \) and sends \(c\) to adversary \pause
+        \item \(\mathcal{A}\) outputs \(b^{*}\), guessing which experiment was selected by the Challenger
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Semantic Security Advantage}
+    \begin{itemize}
+        \item The \textit{Semantic Security Advantage (SSA)} of the adversary \(\mathcal{A}\), is \pause \[ SSA[\mathcal{A}, \mathcal{E}] \coloneqq |Pr[W_0] - Pr[W_1]| \] where \(W_b\) is the probability that \(\mathcal{A}\) outputs \(1\) in experiment \(b\) \pause
+        \item At random, \(\mathcal{A}\) has a \(50\%\) probability of outputting the correct bit, yielding \[  SSA[\mathcal{A}, \mathcal{E}] \coloneqq |Pr[W_0] = Pr[W_1]| = 0 \] \pause
+        \item In order to be semantically secure, the advantage has to be negligible. We can think of negligible as \( 1 + \lambda \approx 1, \lambda = 2^{-100}\) 
+    \end{itemize} 
+\end{frame}
+
+\begin{frame}
+\frametitle{Semantic Security to Message Recovery}
+    Semantic Security guarantees that an adversary cannot recover a message from a cipher text. \pause
+    Here is our security game for message recovery. \pause
+    \begin{itemize}
+        \item Let \(\mathcal{E} = (E, D)\) be a semantically secure cipher defined over \((\mathcal{K}, \mathcal{M}, \mathcal{C})\) and let our adversary \(\mathcal{A}\) be computationally bounded \pause
+        \item Challenger generates \(k \xleftarrow[]{R} \mathcal{K}\), \(m \xleftarrow[]{R} \mathcal{M}\) and computes \(E(k, m) = c\) and send \(c\) to the adversary \(\mathcal{A}\) \pause
+        \item \(\mathcal{A}\) outputes message \(m^{*}\) \pause
+    \end{itemize} 
+\end{frame}
+
+\begin{frame}
+\frametitle{Semantic Security to Message Recovery: cont}
+    Now let's use our adversary \(\mathcal{A}\) to break semantic security, violating our original assumption.
+    \begin{itemize}
+        \item Let \(\mathcal{E} = (E, D)\) be a semantically secure cipher defined over \((\mathcal{K}, \mathcal{M}, \mathcal{C})\) and let our adversary \(\mathcal{B}\) be computationally bounded \pause
+        \item \(\mathcal{B}\) picks \(m_0, m_1 \in \mathcal{M}\) and sends to challenger \pause
+        \item Challenger selects \(k \xleftarrow[]{R} \mathcal{K}\) \pause
+        \item Challenger computes \(E(k, m_b) \coloneqq c \) and sends \(c\) to \(\mathcal{B}\) \pause
+        \item \(\mathcal{B}\) sends \(c\) to \(\mathcal{A}\), simulating the message recovery game. \pause
+        \item \(\mathcal{A}\) returns \(m^{*}\). If \(m^{*} = m_1\), \(\mathcal{B}\) returns 1, else it returns 0. \pause
+    \end{itemize} 
+    Thus, if we can recover the message, we have broken semantic security.
+\end{frame}
+
+\begin{frame}
+\frametitle{Derive Anonymous Routing from Semantic Security}
+    \begin{itemize}
+        \item Let \(\mathcal{E} = (E, D)\) be a semantically secure cipher defined over \((\mathcal{K}, \mathcal{M}, \mathcal{C})\) \pause
+        \item Suppose Alice wants to send information to Bob, but doesn't want Bob to know that the message came from her. \pause (example: you want a radiologist to review a patient's scans without revealing the patients identity) \pause
+        \item Alice must first share \(k_0\) with \(router_0\) and \(k_1\) with \(router_1\). \pause
+        \item Then Alice sends \(E(k_0, E(k_1, m))\) to router 1. \pause
+        \item \(router_1\) decrypts and sends the message \(E(k_1, m)\) to \(router_2\) in random order. \pause
+        \item \(router_2\) decrypts and sends the message \(m\) to Bob in random order.\pause
+    \end{itemize} 
+    
+    Alice's security is \(1 \ n\) where \(n\) is the number of messages sent along the network.
+
+\end{frame}
+
+ 
+\end{document}
