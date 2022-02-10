@@ -304,7 +304,7 @@
                 Let's pretend we have two protagonists: Alice and Bob.
               </li>
               <li class="fragment">
-                Alice wants to send Bob a message but she has pass the note
+                Alice wants to send Bob a message but she has to pass the note
                 through an unsafe medium
               </li>
               <li class="fragment">
@@ -381,14 +381,14 @@ def encode_message(plain_secret, shift):
 	encrypted_message = ""
 	for i in range(len(plain_secret)):
 		curr_index = alphabet.index(plain_secret[i])
-		encrypted_message += alphabet[(3 + curr_index) % 26]
+		encrypted_message += alphabet[(shift + curr_index) % 26]
 	return encrypted_message
 
 def decode_message(encrypted_secret, shift):
 	plain_message = ""
 	for i in range(len(encrypted_secret)):
 		curr_index = alphabet.index(encrypted_secret[i])
-		new_message += alphabet[(current_index - 3) % 26]
+		plain_message += alphabet[(curr_index - shift) % 26]
 	return plain_message</code>
 				  </pre>
             </div>
@@ -422,7 +422,7 @@ secret = "hello"
 
 def encrypt(plain_secret, key):
 	encrypted_secret = ""
-	shifts = [alphabet.index(key[i % len(key)]) for i in len(plain_secret)]
+	shifts = [alphabet.index(key[i % len(key)]) for i in range(len(plain_secret))]
 	for i in range(len(plain_secret)):
 		shift = shifts[i]
 		curr_index = alphabet.index(plain_secret[i])
@@ -431,9 +431,9 @@ def encrypt(plain_secret, key):
 
 def decode(encrypted_secret, key):
 	plain_secret = ""
-	shifts = [alphabet.index(key[i % len(key)]) for i in len(encrypted_secret)]
+	shifts = [alphabet.index(key[i % len(key)]) for i in range(len(encrypted_secret))]
 	for i in range(len(encrypted_secret)):
-		shift = shift[i]
+		shift = shifts[i]
 		curr_index = alphabet.index(encrypted_secret[i])
 		plain_secret += alphabet[(curr_index - shift) % 26]
 	return plain_secret</code>
