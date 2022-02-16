@@ -1,0 +1,49 @@
+\documentclass{beamer}
+ 
+\usepackage[utf8]{inputenc}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+
+\usetheme{CambridgeUS}
+\useoutertheme{split}
+\setbeamertemplate{title page}[default][colsep=-4bp,rounded=true]
+ 
+%Information to be included in the title page:
+\title{Semantic Security}
+\author{Rohit Musti}
+\institute{CUNY - Hunter College}
+\date{\today}
+ 
+\begin{document}
+ 
+\frame{\titlepage}
+\begin{frame}
+    \frametitle{PRG Security Game}
+    \begin{tikzpicture}
+      \pause
+        \node[draw] (Adversary) at (-3, 2) {\(\mathcal{A}\)}; 
+        \draw[thick] (Adversary) -- ++(0, -4); 
+        \draw[thick] (Adversary) -- ++(-2, 0);
+        \draw[thick] (-3, -2) -- ++(-2, 0);
+      \pause
+
+        \node[draw] (Challenger) at (3,2) {\(\mathcal{C}\)}; 
+        \draw[thick] (Challenger) -- ++(0, -4);
+        \draw[thick] (Challenger) -- ++(2, 0);
+        \draw[thick] (3, -2) -- ++(2, 0);
+      \pause
+
+        \node[draw=none,fill=none,anchor=west, font=\footnotesize] (bit) at ($(Challenger) + (0,-0.85)$) {\(b \xleftarrow[]{R} \{0, 1\}\)};
+      \pause
+        \node[draw=none,fill=none,anchor=west, font=\footnotesize] (bit) at ($(Challenger) + (0,-1.45)$) {if \(b == 0 \): \(k \xleftarrow[]{R} K,\) return \(k \)};
+      \pause
+        \node[draw=none,fill=none,anchor=west, font=\footnotesize] (bit) at ($(Challenger) + (0,-2.05)$) {if \(b == 1 \): \(s \xleftarrow[]{R} S,\) return \(G(s) \)};
+      \pause
+        \draw[->,thick] ($(Challenger)+(0,-2.5)$) -- ($(Adversary)+(0,-2.5)$) node [pos=0.5,above,font=\footnotesize] {\(c \)};
+
+      \pause
+        \draw[->,thick] ($(Adversary)+(-1,-4)$) -- ($(Adversary)+(-1,-5)$) node [pos=0.5,left,font=\footnotesize] {\(b\)};
+      \end{tikzpicture}
+\end{frame}
+\end{document}
