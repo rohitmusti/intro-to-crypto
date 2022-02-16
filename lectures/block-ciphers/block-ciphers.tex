@@ -7,6 +7,8 @@
 \usepackage{graphicx}
 \graphicspath{ {./images/} }
 
+
+
 \usetheme{CambridgeUS}
 \useoutertheme{split}
 \setbeamertemplate{title page}[default][colsep=-4bp,rounded=true]
@@ -322,6 +324,16 @@
 \end{frame}
 
 \begin{frame}
+    \frametitle{Data Encryption Standard (DES)}
+    \begin{itemize}
+        \item \pause IBM developed it with 128 bit keys and 128 blocks in 1970s \pause
+        \item the US National Beureau of Labor Standards requested a version of it (56 bit keys operating 64 bit blocks)\pause
+        \item widely criticized and speculated to have been made deliberately weak by certain US intelligence agencies\pause
+        \item Many fancy ways to break it, but you could brute force its 56 bit variant by 1998, now it can be brute forced in just 12 days \pause
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
     \frametitle{Advanced Encryption System (AES)}
     \begin{itemize}
         \item \pause Developed by two belgian cryptographers,  Joan Daemen and Vincent Rijmen \pause
@@ -332,7 +344,7 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{Advanced Encryption System (AES)}
+    \frametitle{AES: Algorithm}
     \begin{enumerate}
         \item \pause Derive round keys using key scheduler from cipher key \pause
         \item Expand the current key into the \textit{round} key \pause
