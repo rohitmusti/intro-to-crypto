@@ -1,0 +1,80 @@
+\documentclass[11pt]{article}
+
+\usepackage{enumitem,amsmath,amssymb,graphicx,fancyhdr,framed, amsthm}
+\usepackage[margin=1in,headsep=0.2in]{geometry}
+\pagestyle{fancy}
+
+%%% TODO: Fill in the following fields
+\newcommand{\psetnumber}{1}
+\newcommand{\name}{Student Name}
+\newcommand{\id}{Hunter Net ID}
+\newcommand{\collaborators}{Collaborators}
+\newcommand{\coursename}{Introduction to Cryptography}
+%%% TODO: Fill in the above fields
+
+\begin{document}
+
+\lhead{\coursename: Problem Set \psetnumber}
+\rhead{\name \ (\id)}
+
+\begin{center}
+{\Large \coursename Problem Set \psetnumber}
+\medskip
+
+\begin{tabular}{rl}
+Name: & \name \\
+Collaborators: & \collaborators
+\end{tabular}
+\end{center}
+
+\begin{framed}
+\centering
+\noindent \small By turning in this assignment, I agree to abide
+by and uphold the Honor System of 
+\mbox{Introduction to Cryptography} as
+well as the additional policies outlined on the course website.
+\end{framed}
+
+\begin{framed}
+\centering
+\noindent \small 
+Transparency Note: 
+This homework structure is modeled off of David Wu's Advanced Topics in Cryptography course. 
+Long Answer Question 2 is taken from the text book and credit should go to Dan Boneh and Victor Shoup.
+\end{framed}
+
+\section*{True or False (3 points each)}
+
+\begin{enumerate}
+    \item True or False: Intuition is sufficient for determining whether a cryptographic cipher is secure. Why?
+    \item True or False: It is important to "roll your own" (write your own) encryption. Why?
+\end{enumerate}
+
+\section*{Short Answer (5 points each)}
+
+\begin{enumerate}
+    \item Does the one time pad meet the Shannon Cipher correctness requirement? Why or Why not? Please include both a mathematical explanation and an example using "real" numbers.
+    \item Why can you not use a one time pad more than once? Please explain a successful attack mathematically and include an example using "real" data.
+    \item What is the difference between a Pseudo Random Generator (PRG), Pseudo Random Function (PRF), and Pseudo Random Permutation (PRP)? When would you use each?
+    \item Please describe how to use a PRF to construct a MAC.
+    \item I have encrypted a message using a cipher we have discussed in class with a 3 character key. Decode the message and key! Please describe your attack. \[\textit{nGmni akr bogpitr Fmeorcbi usxfyyr uiw}\]
+\end{enumerate}
+
+\section*{Long Answer (10 points each)}
+
+\begin{enumerate}
+    \item How does the Electronic Code Book (ECB) encryption system work? What is Chosen Plaintext Attack (CPA) security? Describe an attack game that breaks the CPA security of an ECB system (diagrams optional, but recommended).
+    \item A proposed system of voting would work as follows.  Given \(t\) voters, a central tallying center samples a number \(n_0 \xleftarrow[]{R} \{0, 1, 2, ... , t + 10\}\) and sends that number to voter 1. Voter 1 then adds their vote \(v \leftarrow \{0, 1\}\) to the tally \(n_1 \leftarrow n_0 + v\) and passes the new total to voter 2. This continues until the final voter hands back the vote to the central tallying center which then determines who won by subtracting out the original random number they chose and determining if the vote sum is greater than or equal to half of the voters. Does this system meet the Shannon Cipher correctness property? Describe an attack that would allow two voters to collude to determine the vote of a third voter. 
+    \item Describe an example of symmetric key cryptography being used and succesfully broken through an attack in the real world. What were the cryptographic ciphers used? What was the mechanism of attack? What were the repercussions of this attack? Bonus point: walk through an example of the attack using real world data.
+\end{enumerate}
+
+\section*{Feedback (optional) (0 points each)}
+
+\begin{enumerate}
+    \item What was the hardest problem on this problem set?
+    \item What was your favorite problem on the problem set?
+    \item How long did you spend on this problem set?
+    \item Do you have any feedback for how I can improve either this homework set or the course in general?
+\end{enumerate}
+
+\end{document}
