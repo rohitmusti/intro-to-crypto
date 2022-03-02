@@ -1,0 +1,14 @@
+\frametitle{One Time Pad: Decryption}
+  \begin{verbatim}
+def decrypt(key, cipher_text):
+    message = ""
+    if len(key) != len(cipher_text):
+      print("error, key is not the same length as the ciphertext")
+      print("key length:", len(key))
+      print("cipher_text length:", len(cipher_text))
+
+    for i in range(len(key)):
+      message += f"{key[i] != cipher_text[i]}"
+
+    return message
+  \end{verbatim}
