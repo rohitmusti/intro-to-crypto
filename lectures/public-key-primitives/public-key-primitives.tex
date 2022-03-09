@@ -1,4 +1,4 @@
-\documentclass[handout]{beamer}
+\documentclass[]{beamer}
  
 \usepackage[utf8]{inputenc}
 \usepackage{mathtools}
@@ -42,7 +42,7 @@
         \item \pause They took introduction to cryptography and decide that they want to generate a shared secret \(c\) unknown to any adversary.
         \item \pause This requires that if the eavesdropper takes the transcript of their phone call, they are not able to generate the secret \(k\) 
     \end{itemize}
-    \pause \text(NOTE: no requirements for integrity (no protection from man in the middle) and the protocol is fully anonymous (no way to verify that Alice and Bob are talking to one another))
+    \pause NOTE: no requirements for integrity (no protection from man in the middle) and the protocol is fully anonymous (no way to verify that Alice and Bob are talking to one another)
 \end{frame}
 
 % Key Exchange Attqck
@@ -92,7 +92,7 @@
         \begin{itemize}
             \item \pause \(G\): probabilistic generator  (\(pk, sk) \xleftarrow[]{R} G()\)
             \item \pause \(F\): determinstic function \(y \xleftarrow[]{} F(pk, x)\) 
-            \item \pause \(I\): determinstic function \(x \xleftarrow[]{} I(sk, x)\) (should be hard w/o \(sk\))
+            \item \pause \(I\): determinstic function \(x \xleftarrow[]{} I(sk, y)\) (should be hard w/o \(sk\))
         \end{itemize}
         \item \pause correctness: \(\forall (pk, sk): I(sk, F(pk, x)) = x\)
     \end{itemize}
@@ -158,6 +158,33 @@
 \end{frame}
 
 \section{RSA}
+
+% RSA Background
+\begin{frame}{RSA Background}
+    \begin{itemize}
+        \item \pause Named after Ron Rivest, Adi Shamir, and Leonard Adleman at the Massachusetts Institute of Technology
+        \item \pause Legend has it they got drunk on wine during passover at a student's house and came up with the system staying up all night
+        \item \pause allegedly, the british intelligence agencies came up with a similar system a few years earlier but didn't think it was feasible with the current computers
+    \end{itemize}
+\end{frame}
+
+% RSA Key Generation
+\begin{frame}{RSA Key Generation}
+    \begin{itemize}
+        \item Key Generation
+        \begin{enumerate}
+            \item \pause pick an integer \(\ell > 2\) and an odd integer \(e > 2\) 
+            \item \pause generate a random \(\ell\)-bit prime \(p\) s.t. \(gcd(e, p-1) = 1\)
+            \item \pause generate a random \(\ell\)-bit prime \(q\) s.t. \(gcd(e, q-1) = 1\) and \(p \neq q\)
+            \item \pause \(n \leftarrow pq\)
+            \item \pause \(d \leftarrow e^{-1}mod (p-1)(q-1) \)
+            \item \pause \(pk = (n, e)\) and \(sk = (n, d)\)
+        \end{enumerate}
+        \item \pause \(x \in \mathbb{Z}_n\)
+        \item \pause \(F(pk, x) \coloneqq x^e \in \mathbb{Z}_n\) 
+        \item \pause \(I(sk, y) \coloneqq y^d \in \mathbb{Z}_n\) 
+    \end{itemize}
+\end{frame}
 
 % RSA Security
 \begin{frame}{RSA Security}
@@ -225,7 +252,7 @@
 \begin{frame}{Diffie-Hellman Security}
     \begin{itemize}
         \item \pause Security rests on the difficulty of the discrete log problem
-        \item \pause over a cyclic group \(\mathbb{G}\) it is mathematically hard to compute \(\alpha\) given \(g^\alpha\), where \(g\) is a generate of \(mathcal{G}\)
+        \item \pause over a cyclic group \(\mathbb{G}\) it is mathematically hard to compute \(\alpha\) given \(g^\alpha\), where \(g\) is a generator of \(\mathcal{G}\)
         \item \pause this is further extended to: given (\(g^\alpha, g^\beta\)) where \(g\) is a generator, \(\alpha, \beta \xleftarrow[]{R} \mathbb{Z}_q\), it is hard to compute \(g^{\alpha\beta}\)
     \end{itemize}
 \end{frame}
