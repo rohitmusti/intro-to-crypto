@@ -184,8 +184,38 @@
 
 \section{Chosen Ciphertext Attack Security}
 
-\begin{frame}{CCA Overview}
-  
+\begin{frame}{CCA Motivation}
+  \begin{itemize}
+    \item \pause Imagine I collected homework by email and required that y'all encrypt your homework with my public key \(pk\)
+    \item \pause What if another student intercepted that stream of data and strategically flipped bits until the submission read as "from: student1" to "from: student2"
+    \item \pause Therefore, we need our systems to be secure against adversaries generating valid cipher texts
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{CCA Construction}
+  \pause
+  \[E(pk, m) = [x \xleftarrow[]{R} \mathcal{X}, y \leftarrow F(pk, x), k \leftarrow H(x), c \xleftarrow[]{R} E_s(k, m)] \rightarrow (c, y)\]
+  \pause
+  \[D(pk, (y, c)) = [x \leftarrow I(sk, y), k \leftarrow H(x), m \leftarrow D_s(k,c) ]\rightarrow m\]
+\end{frame}
+
+\section{Shamir Secret Sharing}
+
+\begin{frame}{Motivation}
+  \begin{itemize}
+    \item \pause suppose you have a secret that you want to share with your friends
+    \item \pause but you only want your friends to unlock this secret if they are all together
+    \item \pause wouldn't it be cool if there was a mathematical way to ensure they can only unlock the secret if they are all together?
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Overview}
+  \begin{itemize}
+    \item \pause Enter polynomial interpolation
+    \item \pause if you have two points, you can find a unique line that intersects them, if you have 3 points, you can identify a unique parabola and so on
+    \item \pause you can encode your secret somewhere along a function, and then tell all of your friends a different point along the curve expressed by the function
+    \item \pause if enough of your friends get together, they can figure out the exact curve and and find the secret!
+  \end{itemize}
 \end{frame}
 
 \end{document}
