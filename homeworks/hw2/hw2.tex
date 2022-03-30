@@ -1,0 +1,69 @@
+\documentclass[11pt]{article}
+
+\usepackage{enumitem,amsmath,amssymb,graphicx,fancyhdr,framed, amsthm}
+\usepackage[margin=1in,headsep=0.2in]{geometry}
+\pagestyle{fancy}
+
+%%% TODO: Fill in the following fields
+\newcommand{\psetnumber}{2}
+\newcommand{\name}{Student Name}
+\newcommand{\id}{Hunter Net ID}
+\newcommand{\collaborators}{Collaborators}
+\newcommand{\coursename}{Introduction to Cryptography: }
+%%% TODO: Fill in the above fields
+
+\begin{document}
+
+\lhead{\coursename: Problem Set \psetnumber}
+\rhead{\name \ (\id)}
+
+\begin{center}
+{\Large \coursename Problem Set \psetnumber}
+\medskip
+
+\begin{tabular}{rl}
+Name: & \name \\
+Collaborators: & \collaborators
+\end{tabular}
+\end{center}
+
+\begin{framed}
+\centering
+\noindent \small By turning in this assignment, I agree to abide
+by and uphold the Honor System of 
+\mbox{Introduction to Cryptography} as
+well as the additional policies outlined on the course website.
+\end{framed}
+
+\begin{framed}
+\centering
+\noindent \small 
+Transparency Note: 
+This homework structure is modeled off of David Wu's Advanced Topics in Cryptography course. 
+\end{framed}
+
+\section*{Short Answer (3 points each)}
+
+\begin{enumerate}
+    \item True or False: Asymmetric cryptography is inherently more secure that symmetric cryptography. Why?
+    \item Why would someone use public key (asymmetric) over secret key (symmetric) cryptography?
+\end{enumerate}
+
+\section*{Medium Answer (7 points each)}
+\begin{enumerate}    
+    \item Recall the description of Diffie-Hellman key exchange. It roughly boils down to two messages exchanged: (1) Alice sending \(g^a\) to Bob and (2) Bob sending \(g^b\) to Alice. Then, they each can compute \(g^{ab}\). This is the shared secret they can then use to for security. How could you modify this protocol to work for three actors?  
+    \item In class we discussed some of the benefits and costs of digital signatures systems. One potential limitation of a digital signature is that for a given signature \(\sigma\) of a message \(m\) corresponding a public key \(pk\), one could generate a \(pk', sk'\) that produces a signature \(\sigma'\) for \(m\), such that \(\sigma' = \sigma\). Given a signing function \(S\), a verification function \(V\), that each take corresponding private and public keys for generating and verifying a signature and are vulnerable to this duplicate keys, please generate a \(S'\) and \(V'\) that are immune to a duplicate keys attack.
+    \item In class we discussed the public security semantic security attack game. When constructing the public key encryption for the class, I highlihgted that the encryption function needs to have random outputs. Please describe an attack that would be break semantic security of a deterministic, asymmetric encryption system. (hint: start by defining semantic security, and how public key encryption systems are used in the real world)
+    \item In class we discussed how to construct a digital signatures using trapdoor functions. It was highlighted that without hashing and then signing the message, an attacker could trivially generate secure signatures. Why is this the case? Please describe an attack an adversary could run against a system that used a trapdoor to construct digital signatures but didn't hash the message beforehand! (hint: think about the properties of trapdoor functions)
+\end{enumerate}
+
+\section*{Feedback (optional) (0 points each)}
+
+\begin{enumerate}
+    \item What was the hardest problem on this problem set?
+    \item What was your favorite problem on the problem set?
+    \item How long did you spend on this problem set?
+    \item Do you have any feedback for how I can improve either this homework set or the course in general?
+\end{enumerate}
+
+\end{document}
