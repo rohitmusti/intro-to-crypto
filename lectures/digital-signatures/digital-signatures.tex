@@ -76,7 +76,7 @@
         \draw[->,thick] ($(AdversaryA)+(0.25,-3.25)$) -- ($(ChallengerA)+(-0.25,-3.25)$) node [pos=0.5,above,font=\footnotesize] {\( (m,\sigma) \)};
 
       \pause
-        \node[draw=none,fill=none,anchor=west, font=\footnotesize] (choice0) at ($(ChallengerA) + (.05,-3.5)$) {\(V(sk,m) == \sigma\)};
+        \node[draw=none,fill=none,anchor=west, font=\footnotesize] (choice0) at ($(ChallengerA) + (.05,-3.5)$) {\(V(pk,m, \sigma) == True\)};
 
       \end{tikzpicture}
 \end{frame}
@@ -103,7 +103,7 @@
     \pause
     \[S(sk, m) = y \leftarrow H(m), \sigma \leftarrow I(sk, y)\]
     \pause
-    \[V(pk, m \sigma) = y \leftarrow F(pk, sigma), y == H(m)\]
+    \[V(pk, m, \sigma) = y \leftarrow F(pk, \sigma), y == H(m)\]
 \end{frame}
 
 \begin{frame}{Security}
