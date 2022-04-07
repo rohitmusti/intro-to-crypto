@@ -110,9 +110,9 @@
       \pause 
         \node[draw=none,fill=none,anchor=east, font=\footnotesize] (choice0) at ($(Adversary) + (0,-2.35)$) {\(z = r + cx\)};
       \pause
-        \draw[->,thick] ($(Adversary)+(0,-2.65)$) -- ($(Challenger)+(0,-2.65)$) node [pos=0.5,above,font=\footnotesize] {\(u\)};
+        \draw[->,thick] ($(Adversary)+(0,-2.65)$) -- ($(Challenger)+(0,-2.65)$) node [pos=0.5,above,font=\footnotesize] {\(z\)};
       \pause
-        \node[draw=none,fill=none,anchor=west, font=\footnotesize] (bit) at ($(Challenger) + (0,-3.05)$) {Verify \(g^x = h * u^c\)};
+        \node[draw=none,fill=none,anchor=west, font=\footnotesize] (bit) at ($(Challenger) + (0,-3.05)$) {Verify \(g^z = u \times h^c\)};
       \end{tikzpicture}
 \end{frame}
 
@@ -173,7 +173,7 @@
         \node[draw=none,fill=none,anchor=east, font=\footnotesize] (choice0) at ($(Adversary) + (0,-1.15)$) {\(\pi \xleftarrow[]{R} Perm(K)\)};
         \node[draw=none,fill=none,anchor=east, font=\footnotesize] (choice0) at ($(Adversary) + (0,-1.65)$) {\(c_i, r_i \leftarrow Commit(_, K_i)\)};
       \pause
-        \draw[->,thick] ($(Adversary)+(0,-1.95)$) -- ($(Challenger)+(0,-1.95)$) node [pos=0.5,above,font=\footnotesize] {\(u\)};
+        \draw[->,thick] ($(Adversary)+(0,-1.95)$) -- ($(Challenger)+(0,-1.95)$) node [pos=0.5,above,font=\footnotesize] {\((c_0, r_0),...,(c_i,r_j)\)};
       \pause
         \node[draw=none,fill=none,anchor=west, font=\footnotesize] (bit) at ($(Challenger) + (0,-2.25)$) {\((i,j) \xleftarrow[]{R} E \)};
       \pause
