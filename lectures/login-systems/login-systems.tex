@@ -1,0 +1,164 @@
+\documentclass[handout]{beamer}
+ 
+\usepackage[utf8]{inputenc}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usepackage{amsmath}
+
+\usetheme{CambridgeUS}
+% \useoutertheme{split}
+\setbeamertemplate{title page}[default][colsep=-4bp,rounded=true]
+
+% only inlcude the current secition in the header
+\AtBeginSection{
+    \begin{frame}
+        \tableofcontents[sections=\value{section}, sectionstyle=show/show]
+    \end{frame}
+}
+
+\usetikzlibrary{calc,shapes}
+\usetikzlibrary{fit,positioning,decorations.pathreplacing,calligraphy}
+
+\tikzstyle{key}=[circle, thin, minimum width=\ln, minimum height=\hn, draw=black, fill=white, inner sep=0cm, anchor=north]
+\tikzstyle{fts}=[key,fill=gray!50,minimum width=0.8*\ln]
+\tikzstyle{hash}=[key,rectangle, anchor=north]
+
+\renewcommand{\ln}{6mm} % largeur de noeud
+\newcommand{\hn}{6mm}    % hauteur de noeud
+\renewcommand{\le}{5mm} % largeur de l'espace
+\newcommand{\he}{8mm}   % hauteur de l'espace
+
+\newcommand{\hasharrow}[2]{ \draw (H#2.north) -- ($(H#2.north)+(0,.5*\he)$) -- ($(H#1.south)+(0,-.5*\he)$) -> (H#1.south); }
+\newcommand{\keyhasharrow}[2]{ \draw (K#2.north) -- ($(K#2.north)+(0,.5*\he)$) -- ($(H#1.south)+(0,-.5*\he)$) -> (H#1.south); }
+\newcommand{\signarrow}[2]{ \draw (K#1.south) edge[dashed,->] (H#2.north); }
+
+
+%Information to be included in the title page:
+\title{Login Protocols}
+\author{Rohit Musti}
+\institute{CUNY - Hunter College}
+\date{\today}
+ 
+\begin{document}
+ 
+\frame{\titlepage}
+
+\section{Overview}
+
+\begin{frame}{Motivating Examples}
+  \begin{itemize}
+    \item \pause Different systems demand different kinds of security!
+    \item \pause If you were trying to unlock your phone or a local computer, you can think of this like unlocking a door, a key should suffice
+    \item \pause If you were trying to unlock a car using a key fob, then we need to design that protocol s.t. any adversary cannot replicate the radio waves
+    \item \pause If you are trying to pay for groceries and someone tries to steal your card information, an ideal protocol wouldn't allow someone to reuse the interaction
+    \item \pause If you are the victim of a phishing attack, ideally someone couldn't reuse the credentials to access your logins! 
+  \end{itemize} 
+\end{frame}
+
+\begin{frame}{Attack Modes}
+  \begin{itemize}
+    \item \pause \textbf{Direct Attacks:} only publicly available parameters!
+    \item \pause \textbf{Eavesdropper Attacks:} listening in on the transcriptions of interactions
+    \item \pause \textbf{Active Attacks:} actively providing malicious interactions
+  \end{itemize} 
+\end{frame}
+
+\begin{frame}{Key Types}
+  \begin{itemize}
+    \item \pause \textbf{Secret Keys:} the verifier keeps their verification key private
+    \item \pause \textbf{Public Keys:} the verifier keeps hteir verification key public
+    \item \pause which is preferred?
+  \end{itemize} 
+\end{frame}
+
+\begin{frame}{State}
+  \begin{itemize}
+    \item \pause \textbf{Stateful Protocols:} verificaiton and secret keys are updated every login
+    \item \pause \textbf{Stateless Protocols:} verification and secret keys do not change
+    \item \pause which is preferred?
+  \end{itemize} 
+\end{frame}
+
+\section{Direct Attacks}
+
+\begin{frame}{Direct Attack Security}
+  \begin{itemize}
+    \item \pause The most basic idea is that the verification key of the server is the same as the password, just check if \(vk = sk\)
+    \item \pause Problems? \pause If the server is compromised, the password is leaked
+    \item \pause basic solution 1: store a hash of the password on the server and compare those stored values
+    \item \pause the flaw is that one instance of eavesdropping reveals the password!
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Online Dictionary Attack}
+  \begin{itemize}
+    \item \pause if you think the password is from a common password, you can simply try the most common passwords
+    \item \pause a common defense is to double the response time every two failed login attempts, to get around this, adversaries might employee botnets
+  \end{itemize} 
+\end{frame}
+
+\begin{frame}{Offline Dictionary Attack}
+  \begin{itemize}
+    \item \pause If a server is compromised, the attacker can steal the password database
+    \item \pause You can simply run the hash function locally and compare to the database until you crack the dictionary passwords
+    \item \pause You don't even need to crack the server's security, you can by the old server hard drives from the company, often you can recover data from those
+    \item \pause 1 in 2 passwords are suspected to be contained in a password dictionary, using random passwords is extremely important
+  \end{itemize} 
+\end{frame}
+
+\begin{frame}{Public Salts}
+  \begin{itemize}
+    \item \pause salts are just random bits that are hashed along with the verification key and stored in the clear
+    \item \pause It makes cracking each individual password take as long as the entire input space if the salts are long enough
+    \item \pause using salts can prevent most pre-processing/offline dictionary attacks, but doesn't defend against weak passwords
+  \end{itemize} 
+\end{frame}
+
+\begin{frame}{Secret Salts}
+  \begin{itemize}
+    \item \pause secret salting is when you assign a very small random value to the end of a password before hashing and storing it in addition to the public salt 
+    \item \pause this means the server itself has to brute force the secret salt every login attempt, if it is kept sufficiently short, it can not directly impact the user experience while adding randomness to otherwise weakish passwords
+  \end{itemize} 
+\end{frame}
+
+\begin{frame}{Slow Hashfunctions}
+  \begin{itemize}
+    \item \pause an individual user logging in will not notice a hash function that is several orders of magnitude slower than Sha-256, but it will signfiicantly slowdown an attacker
+    \item \pause in addition to the actual slower speed of these hash funciton, if we make their memory access hard, then they will be less vulnerable to hardware attacks
+  \end{itemize}
+\end{frame}
+
+\section{Eavesdropping Attacks}
+
+\begin{frame}{Hashbased One Time Passwords (HOTP)}
+  \begin{itemize}
+    \item \pause these require both state and secret keys
+    \item \pause both a prover and the verifier maintain counters
+    \item \pause the prover sends the verifier a hash of the passwor with its current counter and the counter, and then increments the counter
+    \item \pause the verifier then checks the counter is greater than its counter, checks the verification against its hash of the password and the counter, and then increments its counter
+    \item \pause weaknesses: passwords are valid until the next counter increment, we need to keep the user's count and the server's count synchronized
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Timebased One Time Passwords (TOTP)}
+  \begin{itemize}
+    \item \pause the counter is incremented based on time, perhaps every thirty seconds
+    \item \pause when a user tries to authenticate, the server calculates the counter based on the current time
+    \item \pause a lot of phone authentication apps work by setting a one time password and then using timing to generate the current one time password
+    \item \pause the weakness of this system
+  \end{itemize}
+\end{frame}
+
+\section{Active Attacks}
+
+\begin{frame}{S/key}
+  \begin{itemize}
+    \item \pause leverages the concept of hash chaining
+    \item \pause a secret key is sampled and a verification key is generated by creating a hash chain of \(H^n(sk)\)
+    \item \pause verification key is given in the clear
+    \item \pause to authenticate, prover sends the \(H^{n-1}(sk)\) to the verifier who then hashes it one more time to verify, sets the new verification key to the most resent proof by prover
+    \item \pause security rests on the irreversibility of the hash function
+  \end{itemize}
+\end{frame}
+
+\end{document}
