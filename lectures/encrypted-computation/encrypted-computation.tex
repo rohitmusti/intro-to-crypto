@@ -1,0 +1,56 @@
+\documentclass[handout]{beamer}
+ 
+\usepackage[utf8]{inputenc}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usepackage{amsmath}
+
+\usetheme{CambridgeUS}
+% \useoutertheme{split}
+\setbeamertemplate{title page}[default][colsep=-4bp,rounded=true]
+
+% only inlcude the current secition in the header
+\AtBeginSection{
+    \begin{frame}
+        \tableofcontents[sections=\value{section}, sectionstyle=show/show]
+    \end{frame}
+}
+
+\usetikzlibrary{calc,shapes}
+\usetikzlibrary{fit,positioning,decorations.pathreplacing,calligraphy}
+
+\tikzstyle{key}=[circle, thin, minimum width=\ln, minimum height=\hn, draw=black, fill=white, inner sep=0cm, anchor=north]
+\tikzstyle{fts}=[key,fill=gray!50,minimum width=0.8*\ln]
+\tikzstyle{hash}=[key,rectangle, anchor=north]
+
+\renewcommand{\ln}{6mm} % largeur de noeud
+\newcommand{\hn}{6mm}    % hauteur de noeud
+\renewcommand{\le}{5mm} % largeur de l'espace
+\newcommand{\he}{8mm}   % hauteur de l'espace
+
+\newcommand{\hasharrow}[2]{ \draw (H#2.north) -- ($(H#2.north)+(0,.5*\he)$) -- ($(H#1.south)+(0,-.5*\he)$) -> (H#1.south); }
+\newcommand{\keyhasharrow}[2]{ \draw (K#2.north) -- ($(K#2.north)+(0,.5*\he)$) -- ($(H#1.south)+(0,-.5*\he)$) -> (H#1.south); }
+\newcommand{\signarrow}[2]{ \draw (K#1.south) edge[dashed,->] (H#2.north); }
+
+
+%Information to be included in the title page:
+\title{Encrypted Computation}
+\author{Rohit Musti}
+\institute{CUNY - Hunter College}
+\date{\today}
+ 
+\begin{document}
+ 
+\frame{\titlepage}
+
+\section{Overview}
+
+\begin{frame}{Motivating Examples}
+  \begin{itemize}
+    \item \pause The previous protocols we have reviewed have focused on protecting secrets, but what about protecting computation?
+    \item \pause This is very counter intuitive! Encryption is about scrambling data while computation relies on structure
+    \item \pause Core challenge: given a \(c\), can we compute some arbitrary function \(f(x)\) on \(c\)?
+  \end{itemize} 
+\end{frame}
+
+\end{document}

@@ -1,0 +1,67 @@
+\documentclass[11pt]{article}
+
+\usepackage{enumitem,amsmath,amssymb,graphicx,fancyhdr,framed, amsthm}
+\usepackage[margin=1in,headsep=0.2in]{geometry}
+\pagestyle{fancy}
+
+%%% TODO: Fill in the following fields
+\newcommand{\psetnumber}{1}
+\newcommand{\name}{Student Name}
+\newcommand{\id}{Hunter Net ID}
+\newcommand{\coursename}{Introduction to Cryptography}
+%%% TODO: Fill in the above fields
+
+\begin{document}
+
+\lhead{\coursename: Final Exam}
+\rhead{\name \ (\id)}
+
+\begin{center}
+{\Large \coursename: Final Exam}
+\medskip
+
+\begin{tabular}{rl}
+Name: & \name \\
+\end{tabular}
+\end{center}
+
+\begin{framed}
+\centering
+\noindent \small By turning in this assignment, I agree to abide
+by and uphold the Honor System of 
+\mbox{Introduction to Cryptography} as
+well as the additional policies outlined on the course website.
+\end{framed}
+
+\section{Problem 1}
+
+Alice wants to send Bob information over the internet.
+She wants the information to be encrypted such that only Bob can unlock the information.
+
+\begin{enumerate}
+    \item Should Alice use Public or Private Key Cryptography?
+    \item Describe a mechanism for the system you could build to create this system. Include the steps for encryption, decryption, and any initialization of constants.
+    \item How do you know that your system is secure? Be as thorough as possible.
+\end{enumerate}
+
+\section{Problem 2}
+A videogame is divided into n files. The creators of the game want people to download the encrypted videogame files and then buy a unique key to unlock the videogame.
+
+\begin{enumerate}
+    \item  Describe a protocol for encrypting the videogame's n files and generating the keys.
+    \item  Describe the security of your system.
+\end{enumerate}
+
+\section{Problem 3}
+
+A Shamir secret sharing scheme has been set up for 10 committee members. Four members of the committee need to be present to unlock the secret.
+
+The keys of five members are: \((1, 299), (22, 491), (-3, 221), (-4, 2), (5, 101)\)
+
+\begin{enumerate}
+    \item Compute the shared secret (stored on the y-axis) by hand, showing all of your work.
+    \item Generate 5 new keys that match the original function (show all work).
+    \item Generate 5 new keys that match the original secret, but not the original function.
+\end{enumerate}
+
+\end{document}
